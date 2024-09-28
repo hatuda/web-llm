@@ -170,7 +170,7 @@ async function simpleRAG() {
   );
 
   const vectorStore = await MemoryVectorStore.fromTexts(
-    ["mitochondria is the powerhouse of the cell"],
+    ["「人間」テーブルには数値である「id」,文字列である「名前」,数値である「年齢」のカラムがあります。"],
     [{ id: 1 }],
     new WebLLMEmbeddings(engine, embeddingModelId),
   );
@@ -191,7 +191,7 @@ async function simpleRAG() {
   ]);
 
   const formattedPrompt = (
-    await chain.invoke("What is the powerhouse of the cell?")
+    await chain.invoke("PlantUMLの形式に則って「人間」テーブルのER図を書いてください。回答は日本語でお願いします。また、PlantUMLのコードのみの回答をお願いします。")
   ).toString();
   const reply = await engine.chat.completions.create({
     messages: [{ role: "user", content: formattedPrompt }],
